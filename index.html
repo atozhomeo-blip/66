@@ -1,0 +1,4533 @@
+```html
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+
+<meta name="viewport"
+content="width=device-width,
+initial-scale=1,
+maximum-scale=1,
+minimum-scale=1,
+user-scalable=no,
+viewport-fit=cover">
+
+<title>HOMEOKYC | HOMEOPLUSS</title>
+
+<style>
+
+/* =========================================================
+   HOMEOKYC
+   FIXED MOBILE 9:16 / KIOSK DESIGN
+========================================================= */
+
+*{
+    box-sizing:border-box;
+    margin:0;
+    padding:0;
+    -webkit-tap-highlight-color:transparent;
+}
+
+html,
+body{
+    width:100%;
+    height:100%;
+    min-height:100%;
+    overflow:hidden;
+}
+
+body{
+    font-family:Arial,Helvetica,sans-serif;
+    background:#eef8fa;
+    color:#17363d;
+    overscroll-behavior:none;
+}
+
+button,
+input,
+select{
+    font-family:inherit;
+}
+
+button{
+    cursor:pointer;
+}
+
+input,
+select{
+    appearance:none;
+    -webkit-appearance:none;
+}
+
+/* =========================================================
+   APP
+========================================================= */
+
+#app{
+    width:100vw;
+    height:100dvh;
+    min-height:100vh;
+    overflow:hidden;
+    position:relative;
+}
+
+/* =========================================================
+   SCREENS
+========================================================= */
+
+.screen{
+    display:none;
+    width:100%;
+    height:100%;
+    min-height:100%;
+    overflow:hidden;
+}
+
+.screen.active{
+    display:flex;
+}
+
+/* =========================================================
+   HOME
+========================================================= */
+
+.home-screen{
+    align-items:center;
+    justify-content:center;
+    flex-direction:column;
+    padding:24px;
+    position:relative;
+    background:
+        radial-gradient(circle at top,#ffffff 0%,#f4fbfc 50%,#eaf7f9 100%);
+}
+
+/* corner buttons */
+
+.corner-button{
+    position:absolute;
+    top:18px;
+    width:48px;
+    height:48px;
+    border-radius:50%;
+    border:1px solid #d6e7ea;
+    background:#ffffff;
+    box-shadow:
+        0 7px 18px rgba(0,80,95,.12),
+        inset 0 0 0 2px #f2fafb;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    font-size:21px;
+    z-index:20;
+}
+
+.corner-button.admin{
+    right:18px;
+}
+
+.corner-button.doctor{
+    left:18px;
+}
+
+/* logo */
+
+.home-logo{
+    width:clamp(72px,11vh,115px);
+    height:clamp(72px,11vh,115px);
+    border-radius:50%;
+    background:#fff;
+    border:4px solid #00a8b3;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    color:#00a8b3;
+    font-weight:900;
+    font-size:clamp(28px,5vh,52px);
+    box-shadow:0 12px 35px rgba(0,100,115,.14);
+}
+
+.home-title{
+    margin-top:13px;
+    text-align:center;
+}
+
+.home-title h1{
+    font-size:clamp(30px,5.5vh,60px);
+    color:#00a8b3;
+    letter-spacing:2px;
+    line-height:1;
+}
+
+.home-title h2{
+    margin-top:7px;
+    font-size:clamp(11px,1.9vh,18px);
+    color:#2457ba;
+    letter-spacing:1px;
+}
+
+.home-title p{
+    margin-top:8px;
+    color:#637b81;
+    font-size:clamp(10px,1.7vh,15px);
+}
+
+/* home buttons */
+
+.home-actions{
+    width:min(480px,92vw);
+    margin-top:clamp(24px,5vh,50px);
+    display:flex;
+    flex-direction:column;
+    gap:14px;
+}
+
+.home-main-button{
+    width:100%;
+    height:clamp(58px,9vh,78px);
+    border-radius:20px;
+    border:0;
+    background:#fff;
+    color:#17363d;
+    font-size:clamp(16px,2.5vh,22px);
+    font-weight:900;
+    box-shadow:
+        0 10px 28px rgba(0,70,90,.12),
+        inset 0 0 0 2px #e2f0f2;
+}
+
+.home-main-button.primary{
+    color:#fff;
+    background:linear-gradient(135deg,#00a8b3,#2759d8);
+    box-shadow:0 12px 28px rgba(0,110,180,.20);
+}
+
+/* =========================================================
+   GENERAL PANEL
+========================================================= */
+
+.panel{
+    width:min(1100px,96vw);
+    height:min(94dvh,920px);
+    margin:auto;
+    background:#fff;
+    border-radius:28px;
+    overflow:hidden;
+    box-shadow:0 18px 60px rgba(0,70,90,.15);
+    display:flex;
+    flex-direction:column;
+}
+
+.panel-header{
+    height:76px;
+    min-height:76px;
+    border-bottom:1px solid #e3eef0;
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    padding:12px 20px;
+    flex-shrink:0;
+}
+
+.panel-heading{
+    min-width:0;
+}
+
+.panel-heading h2{
+    color:#00a8b3;
+    font-size:clamp(19px,3vh,29px);
+    font-weight:900;
+}
+
+.panel-heading p{
+    color:#72888d;
+    margin-top:4px;
+    font-size:12px;
+}
+
+.back-button{
+    border:0;
+    background:#edf7f9;
+    color:#28545c;
+    min-height:44px;
+    padding:0 18px;
+    border-radius:13px;
+    font-weight:900;
+    font-size:13px;
+    flex-shrink:0;
+}
+
+.panel-body{
+    flex:1;
+    min-height:0;
+    overflow-y:auto;
+    overflow-x:hidden;
+    padding:22px;
+}
+
+/* =========================================================
+   FORM
+========================================================= */
+
+.form-section{
+    margin-bottom:22px;
+}
+
+.form-section-title{
+    color:#2458b8;
+    font-weight:900;
+    font-size:15px;
+    margin-bottom:12px;
+}
+
+.form-grid{
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    gap:16px;
+}
+
+.field{
+    display:flex;
+    flex-direction:column;
+    gap:7px;
+}
+
+.field.full{
+    grid-column:1 / -1;
+}
+
+.field label{
+    color:#526d74;
+    font-size:12px;
+    font-weight:900;
+}
+
+.field input,
+.field select{
+    width:100%;
+    height:52px;
+    min-height:52px;
+    border:2px solid #dcebed;
+    border-radius:14px;
+    padding:0 15px;
+    background:#fbfeff;
+    color:#17363d;
+    font-size:16px;
+    outline:none;
+}
+
+.field input:focus,
+.field select:focus{
+    border-color:#00a8b3;
+    box-shadow:0 0 0 4px rgba(0,168,179,.09);
+}
+
+/* select arrow */
+
+.field select{
+    background-image:
+        linear-gradient(45deg,transparent 50%,#53757c 50%),
+        linear-gradient(135deg,#53757c 50%,transparent 50%);
+    background-position:
+        calc(100% - 18px) 22px,
+        calc(100% - 12px) 22px;
+    background-size:6px 6px,6px 6px;
+    background-repeat:no-repeat;
+    padding-right:40px;
+}
+
+/* =========================================================
+   LARGE ACTION BUTTONS
+========================================================= */
+
+.action-row{
+    display:flex;
+    gap:12px;
+    margin-top:18px;
+}
+
+.action-button{
+    flex:1;
+    height:52px;
+    min-height:52px;
+    border:0;
+    border-radius:14px;
+    font-size:14px;
+    font-weight:900;
+}
+
+.action-button.primary{
+    background:linear-gradient(135deg,#00a8b3,#2458d2);
+    color:white;
+}
+
+.action-button.secondary{
+    background:#edf6f8;
+    color:#31565e;
+}
+
+/* =========================================================
+   INFO CARD
+========================================================= */
+
+.info-card{
+    background:#f4fafb;
+    border:1px solid #dfedef;
+    border-radius:16px;
+    padding:15px;
+    font-size:13px;
+    line-height:1.5;
+}
+
+.info-card strong{
+    color:#00a8b3;
+}
+
+/* =========================================================
+   SLOT CARD
+========================================================= */
+
+.slot-card{
+    display:none;
+    margin-top:15px;
+    padding:16px;
+    border:1px solid #dcebed;
+    border-radius:18px;
+    background:#fbfeff;
+}
+
+.slot-card.visible{
+    display:block;
+}
+
+.slot-header{
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    margin-bottom:13px;
+}
+
+.slot-header strong{
+    font-size:14px;
+}
+
+.slot-count{
+    color:#00a8b3;
+    font-size:12px;
+    font-weight:900;
+}
+
+.slot-pills{
+    display:flex;
+    flex-wrap:wrap;
+    gap:8px;
+}
+
+.slot-pill{
+    width:28px;
+    height:28px;
+    border-radius:50%;
+    background:#cfd5d7;
+    border:2px solid #b7c1c4;
+}
+
+.slot-pill.available{
+    background:#26c86b;
+    border-color:#149d4d;
+}
+
+/* =========================================================
+   LOGIN SCREEN
+========================================================= */
+
+.login-screen{
+    align-items:center;
+    justify-content:center;
+    padding:18px;
+    background:#eef8fa;
+}
+
+.login-card{
+    width:min(520px,94vw);
+    background:#fff;
+    border-radius:28px;
+    padding:clamp(25px,5vw,42px);
+    box-shadow:0 18px 55px rgba(0,70,90,.14);
+}
+
+.login-icon{
+    width:70px;
+    height:70px;
+    margin:0 auto 18px;
+    border-radius:50%;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    background:#f0fafb;
+    border:3px solid #00a8b3;
+    font-size:31px;
+}
+
+.login-card h2{
+    text-align:center;
+    color:#00a8b3;
+    font-size:clamp(22px,4vh,31px);
+    margin-bottom:7px;
+}
+
+.login-card .login-description{
+    text-align:center;
+    color:#71858a;
+    font-size:12px;
+    margin-bottom:27px;
+}
+
+.login-card .field{
+    margin-bottom:18px;
+}
+
+.login-card .field label{
+    font-size:14px;
+}
+
+.login-card .field input{
+    height:60px;
+    min-height:60px;
+    font-size:18px;
+    border-radius:16px;
+}
+
+.login-card .action-button{
+    height:58px;
+    min-height:58px;
+    font-size:16px;
+}
+
+/* =========================================================
+   DASHBOARD
+========================================================= */
+
+.stats-grid{
+    display:grid;
+    grid-template-columns:repeat(3,1fr);
+    gap:12px;
+}
+
+.stat-card{
+    background:#f5fafb;
+    border:1px solid #e0edef;
+    border-radius:17px;
+    padding:15px;
+    min-width:0;
+}
+
+.stat-number{
+    display:block;
+    color:#00a8b3;
+    font-size:23px;
+    font-weight:900;
+    overflow:hidden;
+    text-overflow:ellipsis;
+    white-space:nowrap;
+}
+
+.stat-label{
+    display:block;
+    color:#6b8186;
+    font-size:11px;
+    margin-top:4px;
+}
+
+.dashboard-card{
+    margin-top:16px;
+    background:#fff;
+    border:1px solid #dfecef;
+    border-radius:19px;
+    padding:18px;
+}
+
+.dashboard-card-title{
+    font-size:15px;
+    font-weight:900;
+    color:#2458b8;
+}
+
+.progress-track{
+    width:100%;
+    height:11px;
+    border-radius:20px;
+    background:#e8eff0;
+    overflow:hidden;
+    margin-top:13px;
+}
+
+.progress-bar{
+    height:100%;
+    width:0;
+    background:linear-gradient(90deg,#00a8b3,#2759d8);
+    transition:.4s;
+}
+
+.progress-steps{
+    display:grid;
+    grid-template-columns:repeat(5,1fr);
+    gap:7px;
+    margin-top:15px;
+}
+
+.progress-step{
+    text-align:center;
+    color:#8a999d;
+    font-size:9px;
+}
+
+.progress-circle{
+    width:27px;
+    height:27px;
+    margin:0 auto 5px;
+    border-radius:50%;
+    background:#e4eaeb;
+    line-height:27px;
+    font-weight:900;
+}
+
+.progress-step.completed{
+    color:#009a62;
+}
+
+.progress-step.completed .progress-circle{
+    background:#26c86b;
+    color:#fff;
+}
+
+.status-box{
+    background:#f3fafb;
+    border-radius:14px;
+    padding:13px;
+    margin-top:12px;
+    font-size:13px;
+    line-height:1.5;
+}
+
+/* =========================================================
+   PAYMENT
+========================================================= */
+
+.payment-layout{
+    width:min(580px,100%);
+    margin:auto;
+    text-align:center;
+}
+
+.payment-layout h3{
+    font-size:20px;
+    color:#2458b8;
+}
+
+.payment-amount{
+    font-size:46px;
+    font-weight:900;
+    color:#00a8b3;
+    margin:10px 0;
+}
+
+.qr-box{
+    width:min(230px,60vw);
+    aspect-ratio:1;
+    margin:18px auto;
+    background:
+      repeating-linear-gradient(
+        45deg,
+        #111 0px,
+        #111 4px,
+        #fff 4px,
+        #fff 8px
+      );
+    border:10px solid #fff;
+    box-shadow:0 8px 25px rgba(0,0,0,.14);
+}
+
+.upi-box{
+    padding:13px;
+    background:#f3fafb;
+    border-radius:13px;
+    font-size:14px;
+    margin-bottom:18px;
+}
+
+/* =========================================================
+   ADMIN
+========================================================= */
+
+.admin-stats{
+    display:grid;
+    grid-template-columns:repeat(3,1fr);
+    gap:10px;
+}
+
+.admin-control-row{
+    display:grid;
+    grid-template-columns:repeat(4,1fr);
+    gap:9px;
+    margin-top:13px;
+}
+
+.phase-button{
+    min-height:48px;
+    border:0;
+    border-radius:13px;
+    background:#edf5f7;
+    color:#31555c;
+    font-size:11px;
+    font-weight:900;
+}
+
+.phase-button.open{
+    background:#d9f8e8;
+    color:#00864f;
+}
+
+.table-container{
+    width:100%;
+    overflow:auto;
+    margin-top:13px;
+}
+
+table{
+    width:100%;
+    border-collapse:collapse;
+    font-size:11px;
+}
+
+th,
+td{
+    padding:10px 8px;
+    border-bottom:1px solid #e3edef;
+    text-align:left;
+    white-space:nowrap;
+}
+
+th{
+    background:#f4fafb;
+    color:#2458b8;
+}
+
+.mini-button{
+    border:0;
+    border-radius:8px;
+    padding:7px 9px;
+    margin:2px;
+    background:#e8f7f8;
+    color:#087d86;
+    font-weight:900;
+    font-size:10px;
+}
+
+/* =========================================================
+   DOCTOR
+========================================================= */
+
+.doctor-result{
+    margin-top:18px;
+}
+
+.doctor-patient{
+    padding:17px;
+    border:1px solid #dcebed;
+    border-radius:18px;
+    margin-bottom:12px;
+}
+
+.doctor-patient h3{
+    color:#00a8b3;
+    margin-bottom:10px;
+}
+
+.doctor-buttons{
+    display:grid;
+    grid-template-columns:repeat(3,1fr);
+    gap:8px;
+    margin-top:13px;
+}
+
+.doctor-status{
+    padding:10px;
+    border-radius:10px;
+    background:#f3fafb;
+    font-size:12px;
+}
+
+/* =========================================================
+   RECEIPT
+========================================================= */
+
+.receipt{
+    width:min(800px,100%);
+    margin:auto;
+    border:1px solid #d7e5e8;
+    padding:28px;
+    background:#fff;
+}
+
+.receipt-header{
+    display:flex;
+    justify-content:space-between;
+    gap:20px;
+    border-bottom:2px solid #00a8b3;
+    padding-bottom:15px;
+}
+
+.receipt-brand h1{
+    color:#00a8b3;
+    font-size:28px;
+}
+
+.receipt-brand p{
+    font-size:12px;
+    color:#6b7d82;
+    margin-top:3px;
+}
+
+.receipt-paid{
+    text-align:right;
+    color:#00945d;
+    font-weight:900;
+}
+
+.receipt table{
+    margin-top:20px;
+}
+
+.receipt-total{
+    text-align:right;
+    font-size:22px;
+    font-weight:900;
+    margin-top:20px;
+}
+
+/* =========================================================
+   MODAL
+========================================================= */
+
+.modal{
+    display:none;
+    position:fixed;
+    inset:0;
+    z-index:1000;
+    background:rgba(12,42,49,.52);
+    align-items:center;
+    justify-content:center;
+    padding:18px;
+}
+
+.modal.show{
+    display:flex;
+}
+
+.modal-box{
+    width:min(480px,94vw);
+    max-height:88vh;
+    overflow:auto;
+    background:#fff;
+    border-radius:22px;
+    padding:24px;
+    box-shadow:0 25px 80px rgba(0,0,0,.25);
+}
+
+.modal-box h3{
+    color:#00a8b3;
+    font-size:21px;
+    margin-bottom:13px;
+}
+
+.modal-message{
+    background:#f3fafb;
+    border-radius:13px;
+    padding:14px;
+    font-size:13px;
+    line-height:1.55;
+}
+
+.modal-close{
+    width:100%;
+    height:48px;
+    margin-top:15px;
+    border:0;
+    border-radius:13px;
+    background:#eaf5f7;
+    color:#31545b;
+    font-weight:900;
+}
+
+/* =========================================================
+   MOBILE
+========================================================= */
+
+@media(max-width:700px){
+
+    html,
+    body,
+    #app{
+        width:100%;
+        height:100%;
+        overflow:hidden;
+    }
+
+    .home-screen{
+        padding:15px;
+    }
+
+    .corner-button{
+        top:10px;
+        width:43px;
+        height:43px;
+        font-size:18px;
+    }
+
+    .corner-button.admin{
+        right:10px;
+    }
+
+    .corner-button.doctor{
+        left:10px;
+    }
+
+    .home-logo{
+        width:66px;
+        height:66px;
+        font-size:27px;
+        border-width:3px;
+    }
+
+    .home-title{
+        margin-top:10px;
+    }
+
+    .home-title h1{
+        font-size:31px;
+        letter-spacing:1.5px;
+    }
+
+    .home-title h2{
+        font-size:10px;
+        margin-top:6px;
+    }
+
+    .home-title p{
+        font-size:10px;
+        margin-top:6px;
+    }
+
+    .home-actions{
+        width:90vw;
+        margin-top:24px;
+        gap:11px;
+    }
+
+    .home-main-button{
+        height:61px;
+        min-height:61px;
+        border-radius:17px;
+        font-size:15px;
+    }
+
+    /* full screen panel */
+
+    .panel{
+        width:100%;
+        height:100%;
+        min-height:100%;
+        border-radius:0;
+        box-shadow:none;
+    }
+
+    .panel-header{
+        height:65px;
+        min-height:65px;
+        padding:8px 10px;
+    }
+
+    .panel-heading h2{
+        font-size:18px;
+    }
+
+    .panel-heading p{
+        display:none;
+    }
+
+    .back-button{
+        height:40px;
+        min-height:40px;
+        padding:0 13px;
+        font-size:12px;
+    }
+
+    .panel-body{
+        padding:14px;
+    }
+
+    /* IMPORTANT:
+       mobile forms are deliberately LARGE,
+       not compressed
+    */
+
+    .form-grid{
+        grid-template-columns:1fr;
+        gap:13px;
+    }
+
+    .field.full{
+        grid-column:auto;
+    }
+
+    .field{
+        gap:6px;
+    }
+
+    .field label{
+        font-size:12px;
+    }
+
+    .field input,
+    .field select{
+        height:52px;
+        min-height:52px;
+        font-size:16px;
+        border-radius:14px;
+    }
+
+    .form-section{
+        margin-bottom:17px;
+    }
+
+    .form-section-title{
+        font-size:14px;
+        margin-bottom:9px;
+    }
+
+    .info-card{
+        font-size:12px;
+        padding:12px;
+    }
+
+    .action-row{
+        gap:8px;
+        margin-top:14px;
+    }
+
+    .action-button{
+        height:52px;
+        min-height:52px;
+        font-size:13px;
+        border-radius:13px;
+    }
+
+    /* LOGIN */
+
+    .login-screen{
+        padding:13px;
+    }
+
+    .login-card{
+        width:94vw;
+        border-radius:23px;
+        padding:25px 19px 22px;
+    }
+
+    .login-icon{
+        width:62px;
+        height:62px;
+        font-size:27px;
+        margin-bottom:13px;
+    }
+
+    .login-card h2{
+        font-size:23px;
+    }
+
+    .login-card .login-description{
+        font-size:11px;
+        margin-bottom:22px;
+    }
+
+    .login-card .field{
+        margin-bottom:15px;
+    }
+
+    .login-card .field label{
+        font-size:13px;
+    }
+
+    .login-card .field input{
+        height:58px;
+        min-height:58px;
+        font-size:18px;
+        border-radius:15px;
+    }
+
+    .login-card .action-button{
+        height:55px;
+        min-height:55px;
+        font-size:15px;
+    }
+
+    /* dashboard */
+
+    .stats-grid{
+        grid-template-columns:1fr 1fr;
+        gap:8px;
+    }
+
+    .stat-card{
+        padding:11px;
+        border-radius:14px;
+    }
+
+    .stat-number{
+        font-size:18px;
+    }
+
+    .stat-label{
+        font-size:9px;
+    }
+
+    .dashboard-card{
+        padding:13px;
+        margin-top:11px;
+        border-radius:15px;
+    }
+
+    .dashboard-card-title{
+        font-size:13px;
+    }
+
+    .progress-track{
+        height:9px;
+        margin-top:9px;
+    }
+
+    .progress-steps{
+        gap:3px;
+        margin-top:10px;
+    }
+
+    .progress-step{
+        font-size:7px;
+    }
+
+    .progress-circle{
+        width:23px;
+        height:23px;
+        line-height:23px;
+        font-size:9px;
+    }
+
+    .status-box{
+        font-size:11px;
+        padding:10px;
+    }
+
+    /* payment */
+
+    .payment-layout h3{
+        font-size:17px;
+    }
+
+    .payment-amount{
+        font-size:39px;
+    }
+
+    .qr-box{
+        width:190px;
+    }
+
+    /* admin */
+
+    .admin-stats{
+        grid-template-columns:1fr 1fr;
+        gap:7px;
+    }
+
+    .admin-control-row{
+        grid-template-columns:1fr 1fr;
+        gap:7px;
+    }
+
+    .phase-button{
+        min-height:45px;
+        font-size:10px;
+    }
+
+    table{
+        font-size:10px;
+    }
+
+    /* doctor */
+
+    .doctor-buttons{
+        grid-template-columns:1fr;
+    }
+
+    /* receipt */
+
+    .receipt{
+        padding:16px;
+    }
+
+    .receipt-header{
+        gap:10px;
+    }
+
+    .receipt-brand h1{
+        font-size:22px;
+    }
+
+    .receipt-paid{
+        font-size:11px;
+    }
+
+}
+
+/* =========================================================
+   VERY TALL 9:16 PHONES
+========================================================= */
+
+@media(max-width:700px) and (min-height:760px){
+
+    .home-logo{
+        width:76px;
+        height:76px;
+        font-size:31px;
+    }
+
+    .home-title h1{
+        font-size:34px;
+    }
+
+    .home-actions{
+        margin-top:31px;
+    }
+
+    .home-main-button{
+        height:66px;
+        min-height:66px;
+        font-size:16px;
+    }
+
+}
+
+/* =========================================================
+   SHORT PHONES
+========================================================= */
+
+@media(max-width:700px) and (max-height:650px){
+
+    .home-logo{
+        width:54px;
+        height:54px;
+        font-size:22px;
+    }
+
+    .home-title h1{
+        font-size:26px;
+    }
+
+    .home-title h2{
+        font-size:9px;
+    }
+
+    .home-title p{
+        display:none;
+    }
+
+    .home-actions{
+        margin-top:17px;
+        gap:7px;
+    }
+
+    .home-main-button{
+        height:48px;
+        min-height:48px;
+        font-size:13px;
+    }
+
+}
+
+/* =========================================================
+   PRINT RECEIPT
+========================================================= */
+
+@media print{
+
+    html,
+    body{
+        overflow:visible;
+        background:white;
+    }
+
+    #app{
+        height:auto;
+        overflow:visible;
+    }
+
+    .screen{
+        display:none!important;
+    }
+
+    #receiptScreen{
+        display:flex!important;
+        height:auto;
+        overflow:visible;
+    }
+
+    #receiptScreen .panel{
+        width:100%;
+        height:auto;
+        box-shadow:none;
+        border-radius:0;
+    }
+
+    #receiptScreen .panel-header{
+        display:none;
+    }
+
+    #receiptScreen .panel-body{
+        overflow:visible;
+        padding:0;
+    }
+
+    .receipt{
+        width:100%;
+        border:0;
+    }
+
+    .no-print{
+        display:none!important;
+    }
+}
+
+</style>
+</head>
+
+
+<body>
+
+<div id="app">
+
+
+<!-- ======================================================
+     HOME
+======================================================= -->
+
+<section id="homeScreen"
+         class="screen active home-screen">
+
+    <button class="corner-button doctor"
+            onclick="openDoctorLogin()">
+        🩺
+    </button>
+
+    <button class="corner-button admin"
+            onclick="openAdminLogin()">
+        ⚙️
+    </button>
+
+
+    <div class="home-logo">
+        H+
+    </div>
+
+
+    <div class="home-title">
+
+        <h1>HOMEOPLUSS</h1>
+
+        <h2>HOMEOKYC PATIENT TREATMENT PORTAL</h2>
+
+        <p>
+            Secure Registration • Payment • Treatment Progress
+        </p>
+
+    </div>
+
+
+    <div class="home-actions">
+
+        <button class="home-main-button primary"
+                onclick="openRegistration()">
+            📝 New Patient Registration
+        </button>
+
+        <button class="home-main-button"
+                onclick="openPatientLogin()">
+            🔐 Existing Patient Login
+        </button>
+
+    </div>
+
+</section>
+
+
+<!-- ======================================================
+     REGISTRATION
+======================================================= -->
+
+<section id="registrationScreen"
+         class="screen">
+
+    <div class="panel">
+
+        <div class="panel-header">
+
+            <div class="panel-heading">
+
+                <h2>Patient Registration</h2>
+
+                <p>
+                    HOMEOPLUSS • Karnataka 1 Year Treatment Package
+                </p>
+
+            </div>
+
+            <button class="back-button"
+                    onclick="goHome()">
+                Home
+            </button>
+
+        </div>
+
+
+        <div class="panel-body">
+
+            <form id="registrationForm">
+
+                <div class="form-section">
+
+                    <div class="form-section-title">
+                        PATIENT DETAILS
+                    </div>
+
+                    <div class="form-grid">
+
+                        <div class="field">
+
+                            <label>
+                                Patient Name
+                            </label>
+
+                            <input
+                                id="rName"
+                                type="text"
+                                autocomplete="name"
+                                placeholder="Enter patient name"
+                                required>
+
+                        </div>
+
+
+                        <div class="field">
+
+                            <label>
+                                Mobile Number
+                            </label>
+
+                            <input
+                                id="rMobile"
+                                type="tel"
+                                inputmode="numeric"
+                                maxlength="10"
+                                autocomplete="tel"
+                                placeholder="10 digit mobile number"
+                                required>
+
+                        </div>
+
+
+                        <div class="field">
+
+                            <label>
+                                Year of Birth
+                            </label>
+
+                            <input
+                                id="rBirth"
+                                type="number"
+                                inputmode="numeric"
+                                min="1900"
+                                max="2026"
+                                placeholder="YYYY"
+                                required>
+
+                        </div>
+
+
+                        <div class="field">
+
+                            <label>
+                                Gender
+                            </label>
+
+                            <select id="rGender" required>
+
+                                <option value="">
+                                    Select Gender
+                                </option>
+
+                                <option>Male</option>
+                                <option>Female</option>
+                                <option>Other</option>
+
+                            </select>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+
+                <div class="form-section">
+
+                    <div class="form-section-title">
+                        KARNATAKA LOCATION
+                    </div>
+
+                    <div class="form-grid">
+
+                        <div class="field">
+
+                            <label>
+                                State
+                            </label>
+
+                            <select id="rState">
+
+                                <option>
+                                    Karnataka
+                                </option>
+
+                            </select>
+
+                        </div>
+
+
+                        <div class="field">
+
+                            <label>
+                                District
+                            </label>
+
+                            <select
+                                id="rDistrict"
+                                onchange="districtChanged()"
+                                required>
+
+                                <option value="">
+                                    Select District
+                                </option>
+
+                            </select>
+
+                        </div>
+
+
+                        <div class="field full">
+
+                            <label>
+                                Taluk
+                            </label>
+
+                            <select
+                                id="rTaluk"
+                                onchange="talukChanged()"
+                                required>
+
+                                <option value="">
+                                    Select Taluk
+                                </option>
+
+                            </select>
+
+                        </div>
+
+                    </div>
+
+
+                    <div id="slotCard"
+                         class="slot-card">
+
+                        <div class="slot-header">
+
+                            <strong>
+                                Taluk Slot Availability
+                            </strong>
+
+                            <span id="slotCount"
+                                  class="slot-count">
+                            </span>
+
+                        </div>
+
+                        <div id="slotPills"
+                             class="slot-pills">
+                        </div>
+
+                    </div>
+
+                </div>
+
+
+                <div class="form-section">
+
+                    <div class="form-section-title">
+                        TREATMENT PACKAGE
+                    </div>
+
+                    <div class="info-card">
+
+                        <strong>
+                            ₹999 • 1 Year Karnataka Treatment Package
+                        </strong>
+
+                        <br>
+
+                        Eligibility approval and Admin confirmation
+                        are required before final activation.
+
+                    </div>
+
+                </div>
+
+
+                <div class="action-row">
+
+                    <button
+                        type="button"
+                        class="action-button secondary"
+                        onclick="goHome()">
+
+                        Cancel
+
+                    </button>
+
+                    <button
+                        type="submit"
+                        class="action-button primary">
+
+                        Submit Registration
+
+                    </button>
+
+                </div>
+
+            </form>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- ======================================================
+     PATIENT LOGIN
+======================================================= -->
+
+<section id="patientLoginScreen"
+         class="screen login-screen">
+
+    <div class="login-card">
+
+        <div class="login-icon">
+            🔐
+        </div>
+
+        <h2>Patient Login</h2>
+
+        <p class="login-description">
+            Login using your registered mobile number
+            and year of birth.
+        </p>
+
+
+        <div class="field">
+
+            <label>
+                Registered Mobile Number
+            </label>
+
+            <input
+                id="loginMobile"
+                type="tel"
+                inputmode="numeric"
+                maxlength="10"
+                autocomplete="tel"
+                placeholder="Enter 10 digit mobile">
+
+        </div>
+
+
+        <div class="field">
+
+            <label>
+                Year of Birth
+            </label>
+
+            <input
+                id="loginBirth"
+                type="number"
+                inputmode="numeric"
+                placeholder="Enter YYYY">
+
+        </div>
+
+
+        <div class="action-row">
+
+            <button
+                class="action-button secondary"
+                onclick="goHome()">
+
+                Cancel
+
+            </button>
+
+            <button
+                class="action-button primary"
+                onclick="patientLogin()">
+
+                Login
+
+            </button>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- ======================================================
+     PATIENT DASHBOARD
+======================================================= -->
+
+<section id="patientDashboardScreen"
+         class="screen">
+
+    <div class="panel">
+
+        <div class="panel-header">
+
+            <div class="panel-heading">
+
+                <h2>Patient Dashboard</h2>
+
+                <p id="patientWelcome"></p>
+
+            </div>
+
+            <button
+                class="back-button"
+                onclick="goHome()">
+
+                Logout
+
+            </button>
+
+        </div>
+
+
+        <div class="panel-body">
+
+            <div id="patientStats"
+                 class="stats-grid">
+            </div>
+
+
+            <div class="dashboard-card">
+
+                <div class="dashboard-card-title">
+                    Treatment Registration Progress
+                </div>
+
+                <div class="progress-track">
+
+                    <div id="patientProgress"
+                         class="progress-bar">
+                    </div>
+
+                </div>
+
+
+                <div id="patientSteps"
+                     class="progress-steps">
+                </div>
+
+            </div>
+
+
+            <div class="dashboard-card">
+
+                <div class="dashboard-card-title">
+                    Current Status
+                </div>
+
+                <div id="patientStatus"
+                     class="status-box">
+                </div>
+
+            </div>
+
+
+            <div class="dashboard-card">
+
+                <div class="dashboard-card-title">
+                    Patient Services
+                </div>
+
+                <div class="action-row">
+
+                    <button
+                        class="action-button secondary"
+                        onclick="showPackage()">
+
+                        📦 Package
+
+                    </button>
+
+                    <button
+                        class="action-button secondary"
+                        onclick="showVisits()">
+
+                        📋 Visits
+
+                    </button>
+
+                    <button
+                        class="action-button primary"
+                        onclick="showReceipt()">
+
+                        🧾 Receipt
+
+                    </button>
+
+                </div>
+
+
+                <div class="action-row">
+
+                    <button
+                        class="action-button secondary"
+                        onclick="showAppointment()">
+
+                        📅 Appointment
+
+                    </button>
+
+                    <button
+                        class="action-button secondary"
+                        onclick="showSOS()">
+
+                        🚨 SOS
+
+                    </button>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- ======================================================
+     PAYMENT
+======================================================= -->
+
+<section id="paymentScreen"
+         class="screen">
+
+    <div class="panel">
+
+        <div class="panel-header">
+
+            <div class="panel-heading">
+
+                <h2>Package Payment</h2>
+
+                <p>
+                    HOMEOPLUSS • ₹999 • 1 Year
+                </p>
+
+            </div>
+
+            <button
+                class="back-button"
+                onclick="openPatientDashboard()">
+
+                Back
+
+            </button>
+
+        </div>
+
+
+        <div class="panel-body">
+
+            <div class="payment-layout">
+
+                <h3>
+                    Karnataka 1 Year Treatment Package
+                </h3>
+
+                <div class="payment-amount">
+                    ₹999
+                </div>
+
+
+                <div class="info-card">
+                    Scan the payment QR and complete
+                    your payment.
+                </div>
+
+
+                <div class="qr-box"></div>
+
+
+                <div class="upi-box">
+
+                    <b>UPI ID</b><br>
+
+                    homeopluss@ybl
+
+                </div>
+
+
+                <div class="field">
+
+                    <label>
+                        UTR / Transaction Number
+                    </label>
+
+                    <input
+                        id="utrInput"
+                        type="text"
+                        placeholder="Enter UTR number">
+
+                </div>
+
+
+                <div class="action-row">
+
+                    <button
+                        class="action-button secondary"
+                        onclick="openPatientDashboard()">
+
+                        Cancel
+
+                    </button>
+
+                    <button
+                        class="action-button primary"
+                        onclick="submitPayment()">
+
+                        Submit Payment
+
+                    </button>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- ======================================================
+     ADMIN LOGIN
+======================================================= -->
+
+<section id="adminLoginScreen"
+         class="screen login-screen">
+
+    <div class="login-card">
+
+        <div class="login-icon">
+            ⚙️
+        </div>
+
+        <h2>Admin Login</h2>
+
+        <p class="login-description">
+            Authorized HOMEOKYC administration only.
+        </p>
+
+
+        <div class="field">
+
+            <label>
+                Admin Access Code
+            </label>
+
+            <input
+                id="adminCode"
+                type="password"
+                placeholder="Enter admin code">
+
+        </div>
+
+
+        <div class="action-row">
+
+            <button
+                class="action-button secondary"
+                onclick="goHome()">
+
+                Cancel
+
+            </button>
+
+            <button
+                class="action-button primary"
+                onclick="adminLogin()">
+
+                Login
+
+            </button>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- ======================================================
+     ADMIN DASHBOARD
+======================================================= -->
+
+<section id="adminScreen"
+         class="screen">
+
+    <div class="panel">
+
+        <div class="panel-header">
+
+            <div class="panel-heading">
+
+                <h2>HOMEOKYC Admin</h2>
+
+                <p>
+                    Booking • Verification • Payment • Registration
+                </p>
+
+            </div>
+
+            <button
+                class="back-button"
+                onclick="goHome()">
+
+                Logout
+
+            </button>
+
+        </div>
+
+
+        <div class="panel-body">
+
+            <div id="adminStats"
+                 class="admin-stats">
+            </div>
+
+
+            <div class="dashboard-card">
+
+                <div class="dashboard-card-title">
+                    Campaign Controls
+                </div>
+
+                <div class="admin-control-row">
+
+                    <button
+                        id="bookingBtn"
+                        class="phase-button"
+                        onclick="togglePhase('booking')">
+                    </button>
+
+                    <button
+                        id="verificationBtn"
+                        class="phase-button"
+                        onclick="togglePhase('verification')">
+                    </button>
+
+                    <button
+                        id="paymentBtn"
+                        class="phase-button"
+                        onclick="togglePhase('payment')">
+                    </button>
+
+                    <button
+                        id="finalBtn"
+                        class="phase-button"
+                        onclick="togglePhase('final')">
+                    </button>
+
+                </div>
+
+            </div>
+
+
+            <div class="dashboard-card">
+
+                <div class="dashboard-card-title">
+                    Patient Applications
+                </div>
+
+                <div class="table-container">
+
+                    <table>
+
+                        <thead>
+
+                            <tr>
+
+                                <th>Reg No</th>
+                                <th>Name</th>
+                                <th>Location</th>
+                                <th>Eligibility</th>
+                                <th>Payment</th>
+                                <th>Registration</th>
+                                <th>Action</th>
+
+                            </tr>
+
+                        </thead>
+
+                        <tbody id="adminTable">
+                        </tbody>
+
+                    </table>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- ======================================================
+     DOCTOR LOGIN
+======================================================= -->
+
+<section id="doctorLoginScreen"
+         class="screen login-screen">
+
+    <div class="login-card">
+
+        <div class="login-icon">
+            🩺
+        </div>
+
+        <h2>Doctor Login</h2>
+
+        <p class="login-description">
+            Registered and paid patients only.
+        </p>
+
+
+        <div class="field">
+
+            <label>
+                Doctor Access Code
+            </label>
+
+            <input
+                id="doctorCode"
+                type="password"
+                placeholder="Enter doctor code">
+
+        </div>
+
+
+        <div class="action-row">
+
+            <button
+                class="action-button secondary"
+                onclick="goHome()">
+
+                Cancel
+
+            </button>
+
+            <button
+                class="action-button primary"
+                onclick="doctorLogin()">
+
+                Login
+
+            </button>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- ======================================================
+     DOCTOR PANEL
+======================================================= -->
+
+<section id="doctorScreen"
+         class="screen">
+
+    <div class="panel">
+
+        <div class="panel-header">
+
+            <div class="panel-heading">
+
+                <h2>Doctor Panel</h2>
+
+                <p>
+                    Registered paid patients
+                </p>
+
+            </div>
+
+            <button
+                class="back-button"
+                onclick="goHome()">
+
+                Logout
+
+            </button>
+
+        </div>
+
+
+        <div class="panel-body">
+
+            <div class="form-grid">
+
+                <div class="field">
+
+                    <label>
+                        Registration Number
+                    </label>
+
+                    <input
+                        id="doctorSearchReg"
+                        placeholder="HP-KA-...">
+
+                </div>
+
+
+                <div class="field">
+
+                    <label>
+                        Patient Name
+                    </label>
+
+                    <input
+                        id="doctorSearchName"
+                        placeholder="Patient name">
+
+                </div>
+
+            </div>
+
+
+            <div class="action-row">
+
+                <button
+                    class="action-button primary"
+                    onclick="doctorSearch()">
+
+                    🔎 Search Patient
+
+                </button>
+
+            </div>
+
+
+            <div id="doctorResult"
+                 class="doctor-result">
+            </div>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- ======================================================
+     RECEIPT
+======================================================= -->
+
+<section id="receiptScreen"
+         class="screen">
+
+    <div class="panel">
+
+        <div class="panel-header no-print">
+
+            <div class="panel-heading">
+
+                <h2>Payment Receipt</h2>
+
+            </div>
+
+            <div>
+
+                <button
+                    class="back-button"
+                    onclick="openPatientDashboard()">
+
+                    Back
+
+                </button>
+
+                <button
+                    class="back-button"
+                    onclick="window.print()">
+
+                    Print A4
+
+                </button>
+
+            </div>
+
+        </div>
+
+
+        <div class="panel-body">
+
+            <div id="receiptContent">
+            </div>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- ======================================================
+     MODAL
+======================================================= -->
+
+<div id="modal"
+     class="modal">
+
+    <div class="modal-box">
+
+        <h3 id="modalTitle">
+            HOMEOKYC
+        </h3>
+
+        <div id="modalBody">
+        </div>
+
+        <button
+            class="modal-close"
+            onclick="closeModal()">
+
+            Close
+
+        </button>
+
+    </div>
+
+</div>
+
+
+</div>
+
+
+<script>
+
+/* =========================================================
+   DATABASE
+========================================================= */
+
+const DB_KEY = "HOMEOKYC_DATABASE_FIXED_V2";
+
+let db =
+JSON.parse(localStorage.getItem(DB_KEY)) ||
+{
+    patients:[],
+
+    phases:{
+        booking:true,
+        verification:false,
+        payment:false,
+        final:false
+    },
+
+    nextNumber:1
+};
+
+let currentPatient=null;
+
+
+/* =========================================================
+   KARNATAKA DISTRICTS + TALUKS
+========================================================= */
+
+const locations={
+
+"Bagalkot":[
+"Bagalkot",
+"Badami",
+"Bilagi",
+"Hungund",
+"Jamkhandi",
+"Mudhol",
+"Rabkavi-Banahatti"
+],
+
+"Bangalore Rural":[
+"Devanahalli",
+"Doddaballapura",
+"Hosakote",
+"Nelamangala"
+],
+
+"Bangalore Urban":[
+"Bangalore North",
+"Bangalore South",
+"Bangalore East",
+"Bangalore West"
+],
+
+"Belagavi":[
+"Athani",
+"Bailhongal",
+"Belagavi",
+"Chikodi",
+"Gokak",
+"Hukkeri",
+"Khanapur",
+"Mudalgi",
+"Nippani",
+"Ramdurg",
+"Raibag",
+"Saundatti"
+],
+
+"Ballari":[
+"Ballari",
+"Hadagali",
+"Hagaribommanahalli",
+"Harapanahalli",
+"Hoovina Hadagali",
+"Kudligi",
+"Sandur",
+"Siruguppa"
+],
+
+"Bidar":[
+"Aurad",
+"Basavakalyan",
+"Bhalki",
+"Bidar",
+"Chitgoppa",
+"Humnabad"
+],
+
+"Chamarajanagar":[
+"Chamarajanagar",
+"Gundlupet",
+"Kollegal",
+"Yelandur"
+],
+
+"Chikkaballapur":[
+"Bagepalli",
+"Chikkaballapur",
+"Chintamani",
+"Gauribidanur",
+"Gudibande",
+"Sidlaghatta"
+],
+
+"Chikkamagaluru":[
+"Chikkamagaluru",
+"Kadur",
+"Koppa",
+"Mooguru",
+"Mudigere",
+"Narasimharajapura",
+"Sringeri",
+"Tarikere"
+],
+
+"Chitradurga":[
+"Challakere",
+"Chitradurga",
+"Holalkere",
+"Holalkere",
+"Hosadurga",
+"Molakalmuru"
+],
+
+"Dakshina Kannada":[
+"Bantwal",
+"Belthangady",
+"Mangaluru",
+"Moodbidri",
+"Puttur",
+"Sullia"
+],
+
+"Davanagere":[
+"Channagiri",
+"Davanagere",
+"Harapanahalli",
+"Harihar",
+"Honnali",
+"Jagalur"
+],
+
+"Dharwad":[
+"Alnavar",
+"Annigeri",
+"Dharwad",
+"Hubballi",
+"Kalghatgi",
+"Kundgol",
+"Navalgund"
+],
+
+"Gadag":[
+"Gadag",
+"Gajendragad",
+"Lakshmeshwar",
+"Mundargi",
+"Nargund",
+"Ron",
+"Shirahatti"
+],
+
+"Hassan":[
+"Alur",
+"Arkalgud",
+"Arasikere",
+"Belur",
+"Channarayapatna",
+"Hassan",
+"Holenarasipura",
+"Sakleshpur"
+],
+
+"Haveri":[
+"Byadgi",
+"Hangal",
+"Haveri",
+"Hirekerur",
+"Ranebennur",
+"Rattihalli",
+"Savanur",
+"Shiggaon"
+],
+
+"Kalaburagi":[
+"Afzalpur",
+"Aland",
+"Chincholi",
+"Chittapur",
+"Jevargi",
+"Kalaburagi",
+"Sedam"
+],
+
+"Kodagu":[
+"Madikeri",
+"Somwarpet",
+"Virajpet"
+],
+
+"Kolar":[
+"Bangarapet",
+"Kolar",
+"Malur",
+"Mulbagal",
+"Srinivaspur"
+],
+
+"Koppal":[
+"Gangavathi",
+"Kanakagiri",
+"Karatagi",
+"Koppal",
+"Kushtagi",
+"Yelburga"
+],
+
+"Mandya":[
+"Krishnarajpet",
+"Maddur",
+"Malavalli",
+"Mandya",
+"Nagamangala",
+"Pandavapura",
+"Srirangapatna"
+],
+
+"Mysuru":[
+"Hunsur",
+"Krishnarajanagara",
+"Mysuru",
+"Nanjangud",
+"Periyapatna",
+"T. Narasipura"
+],
+
+"Raichur":[
+"Devadurga",
+"Lingsugur",
+"Manvi",
+"Raichur",
+"Sindhanur"
+],
+
+"Ramanagara":[
+"Channapatna",
+"Kanakapura",
+"Magadi",
+"Ramanagara"
+],
+
+"Shivamogga":[
+"Bhadravati",
+"Hosanagara",
+"Sagar",
+"Shikaripura",
+"Shivamogga",
+"Soraba",
+"Thirthahalli"
+],
+
+"Tumakuru":[
+"Chikkanayakanahalli",
+"Gubbi",
+"Koratagere",
+"Kunigal",
+"Madhugiri",
+"Pavagada",
+"Sira",
+"Tiptur",
+"Tumakuru",
+"Turuvekere"
+],
+
+"Udupi":[
+"Byndoor",
+"Karkala",
+"Kundapura",
+"Udupi"
+],
+
+"Uttara Kannada":[
+"Ankola",
+"Bhatkal",
+"Dandeli",
+"Haliyal",
+"Honnavar",
+"Joida",
+"Karwar",
+"Kumta",
+"Mundgod",
+"Siddapur",
+"Sirsi",
+"Yellapur"
+],
+
+"Vijayapura":[
+"Basavana Bagewadi",
+"Indi",
+"Muddebihal",
+"Sindagi",
+"Vijayapura"
+],
+
+"Yadgir":[
+"Shahapur",
+"Shorapur",
+"Yadgir"
+]
+
+};
+
+
+/* =========================================================
+   INITIALISE DISTRICTS
+========================================================= */
+
+function initDistricts(){
+
+    const select=
+    document.getElementById("rDistrict");
+
+    Object.keys(locations)
+    .sort()
+    .forEach(district=>{
+
+        const option=
+        document.createElement("option");
+
+        option.value=district;
+        option.textContent=district;
+
+        select.appendChild(option);
+
+    });
+
+}
+
+initDistricts();
+
+
+/* =========================================================
+   SAVE
+========================================================= */
+
+function saveDB(){
+
+    localStorage.setItem(
+        DB_KEY,
+        JSON.stringify(db)
+    );
+
+}
+
+
+/* =========================================================
+   SCREEN NAVIGATION
+========================================================= */
+
+function showScreen(id){
+
+    document
+    .querySelectorAll(".screen")
+    .forEach(screen=>{
+        screen.classList.remove("active");
+    });
+
+    document
+    .getElementById(id)
+    .classList.add("active");
+
+}
+
+
+function goHome(){
+
+    currentPatient=null;
+
+    showScreen("homeScreen");
+
+}
+
+
+function openRegistration(){
+
+    showScreen("registrationScreen");
+
+}
+
+
+function openPatientLogin(){
+
+    showScreen("patientLoginScreen");
+
+}
+
+
+function openAdminLogin(){
+
+    showScreen("adminLoginScreen");
+
+}
+
+
+function openDoctorLogin(){
+
+    showScreen("doctorLoginScreen");
+
+}
+
+
+/* =========================================================
+   MODAL
+========================================================= */
+
+function showModal(title,message){
+
+    document.getElementById("modalTitle")
+    .textContent=title;
+
+    document.getElementById("modalBody")
+    .innerHTML=
+    `<div class="modal-message">${message}</div>`;
+
+    document.getElementById("modal")
+    .classList.add("show");
+
+}
+
+
+function closeModal(){
+
+    document
+    .getElementById("modal")
+    .classList.remove("show");
+
+}
+
+
+/* =========================================================
+   DISTRICT
+========================================================= */
+
+function districtChanged(){
+
+    const district=
+    document.getElementById("rDistrict").value;
+
+    const taluk=
+    document.getElementById("rTaluk");
+
+    taluk.innerHTML=
+    `<option value="">
+        Select Taluk
+     </option>`;
+
+    document
+    .getElementById("slotCard")
+    .classList.remove("visible");
+
+    if(!district)return;
+
+    locations[district]
+    .forEach(talukName=>{
+
+        const option=
+        document.createElement("option");
+
+        option.value=talukName;
+        option.textContent=talukName;
+
+        taluk.appendChild(option);
+
+    });
+
+}
+
+
+function talukChanged(){
+
+    const district=
+    document.getElementById("rDistrict").value;
+
+    const taluk=
+    document.getElementById("rTaluk").value;
+
+    if(!district || !taluk)return;
+
+    displaySlots(district,taluk);
+
+}
+
+
+/* =========================================================
+   TALUK SLOTS
+========================================================= */
+
+function getTalukUsed(district,taluk){
+
+    return db.patients.filter(patient=>
+        patient.district===district &&
+        patient.taluk===taluk &&
+        patient.status!=="rejected"
+    ).length;
+
+}
+
+
+function displaySlots(district,taluk){
+
+    const maxSlots=10;
+
+    const used=
+    getTalukUsed(district,taluk);
+
+    const available=
+    Math.max(0,maxSlots-used);
+
+
+    document
+    .getElementById("slotCard")
+    .classList.add("visible");
+
+
+    document
+    .getElementById("slotCount")
+    .textContent=
+    `${available} available / ${maxSlots} slots`;
+
+
+    const pills=
+    document.getElementById("slotPills");
+
+    pills.innerHTML="";
+
+
+    for(let i=0;i<maxSlots;i++){
+
+        const pill=
+        document.createElement("div");
+
+        pill.className=
+        i<used
+        ?"slot-pill"
+        :"slot-pill available";
+
+        pills.appendChild(pill);
+
+    }
+
+}
+
+
+/* =========================================================
+   REGISTRATION
+========================================================= */
+
+document
+.getElementById("registrationForm")
+.addEventListener("submit",function(event){
+
+    event.preventDefault();
+
+
+    if(!db.phases.booking){
+
+        showModal(
+            "Booking Closed",
+            "New patient registration is currently closed by Admin."
+        );
+
+        return;
+    }
+
+
+    const name=
+    document.getElementById("rName")
+    .value.trim();
+
+    const mobile=
+    document.getElementById("rMobile")
+    .value.trim();
+
+    const birth=
+    document.getElementById("rBirth")
+    .value.trim();
+
+    const gender=
+    document.getElementById("rGender")
+    .value;
+
+    const district=
+    document.getElementById("rDistrict")
+    .value;
+
+    const taluk=
+    document.getElementById("rTaluk")
+    .value;
+
+
+    if(!/^\d{10}$/.test(mobile)){
+
+        showModal(
+            "Mobile Number",
+            "Please enter a valid 10 digit mobile number."
+        );
+
+        return;
+    }
+
+
+    if(!district || !taluk){
+
+        showModal(
+            "Location Required",
+            "Please select District and Taluk."
+        );
+
+        return;
+    }
+
+
+    if(getTalukUsed(district,taluk)>=10){
+
+        showModal(
+            "Taluk Slot Full",
+            "There is no available slot in the selected taluk."
+        );
+
+        return;
+    }
+
+
+    const duplicate=
+    db.patients.find(patient=>
+        patient.mobile===mobile &&
+        patient.birth===birth
+    );
+
+
+    if(duplicate){
+
+        showModal(
+            "Existing Patient",
+            `This patient already has permanent Registration No.
+             <br><br>
+             <b style="font-size:20px">
+             ${duplicate.regNo}
+             </b>`
+        );
+
+        return;
+    }
+
+
+    const regNo=
+        "HP-KA-" +
+        new Date().getFullYear() +
+        "-" +
+        String(db.nextNumber++)
+        .padStart(5,"0");
+
+
+    const patient={
+
+        regNo:regNo,
+
+        name:name,
+
+        mobile:mobile,
+
+        birth:birth,
+
+        gender:gender,
+
+        state:"Karnataka",
+
+        district:district,
+
+        taluk:taluk,
+
+        package:
+        "Karnataka 1 Year Treatment Package",
+
+        packageAmount:999,
+
+        eligibility:"pending",
+
+        payment:"not_paid",
+
+        registration:"not_registered",
+
+        utr:"",
+
+        balance:999,
+
+        doctorStatus:"waiting",
+
+        visits:[],
+
+        createdAt:
+        new Date().toISOString()
+
+    };
+
+
+    db.patients.push(patient);
+
+    saveDB();
+
+    currentPatient=patient;
+
+
+    showModal(
+        "Registration Successful",
+        `
+        <b>Your application has been submitted.</b>
+
+        <br><br>
+
+        Permanent Registration No.
+
+        <br><br>
+
+        <strong style="
+        font-size:25px;
+        color:#00a8b3">
+        ${regNo}
+        </strong>
+
+        <br><br>
+
+        Keep this Registration No.
+        for all future HOMEOPLUSS treatment records.
+
+        <br><br>
+
+        <button
+        onclick="closeModal();openPatientDashboard()"
+        style="
+        width:100%;
+        height:50px;
+        border:0;
+        border-radius:13px;
+        background:#00a8b3;
+        color:white;
+        font-weight:900">
+
+        Continue
+
+        </button>
+        `
+    );
+
+});
+
+
+/* =========================================================
+   PATIENT LOGIN
+========================================================= */
+
+function patientLogin(){
+
+    const mobile=
+    document.getElementById("loginMobile")
+    .value.trim();
+
+    const birth=
+    document.getElementById("loginBirth")
+    .value.trim();
+
+
+    const patient=
+    db.patients.find(p=>
+        p.mobile===mobile &&
+        p.birth===birth
+    );
+
+
+    if(!patient){
+
+        showModal(
+            "Login Failed",
+            "Patient record not found.<br><br>Please check your mobile number and year of birth."
+        );
+
+        return;
+    }
+
+
+    currentPatient=patient;
+
+    openPatientDashboard();
+
+}
+
+
+function openPatientDashboard(){
+
+    if(!currentPatient){
+
+        openPatientLogin();
+
+        return;
+    }
+
+    showScreen("patientDashboardScreen");
+
+    renderPatientDashboard();
+
+}
+
+
+/* =========================================================
+   PATIENT DASHBOARD
+========================================================= */
+
+function calculateProgress(patient){
+
+    if(patient.registration==="registered")
+        return 100;
+
+    if(patient.payment==="confirmed")
+        return 80;
+
+    if(patient.eligibility==="approved")
+        return 55;
+
+    return 20;
+
+}
+
+
+function renderPatientDashboard(){
+
+    const p=currentPatient;
+
+
+    document
+    .getElementById("patientWelcome")
+    .textContent=
+    `${p.name} • ${p.regNo}`;
+
+
+    document
+    .getElementById("patientStats")
+    .innerHTML=`
+
+        <div class="stat-card">
+
+            <span class="stat-number">
+                ${p.regNo}
+            </span>
+
+            <span class="stat-label">
+                Permanent Registration
+            </span>
+
+        </div>
+
+
+        <div class="stat-card">
+
+            <span class="stat-number">
+                ${p.taluk}
+            </span>
+
+            <span class="stat-label">
+                Taluk
+            </span>
+
+        </div>
+
+
+        <div class="stat-card">
+
+            <span class="stat-number">
+                ₹${p.balance}
+            </span>
+
+            <span class="stat-label">
+                Balance
+            </span>
+
+        </div>
+
+
+        <div class="stat-card">
+
+            <span class="stat-number">
+                ${p.visits.length}
+            </span>
+
+            <span class="stat-label">
+                Visits
+            </span>
+
+        </div>
+
+    `;
+
+
+    document
+    .getElementById("patientProgress")
+    .style.width=
+    calculateProgress(p)+"%";
+
+
+    const steps=[
+
+        {
+            label:"Application",
+            done:true
+        },
+
+        {
+            label:"Eligibility",
+            done:p.eligibility==="approved"
+        },
+
+        {
+            label:"Payment",
+            done:p.payment==="confirmed"
+        },
+
+        {
+            label:"Registered",
+            done:p.registration==="registered"
+        },
+
+        {
+            label:"Treatment",
+            done:p.visits.length>0
+        }
+
+    ];
+
+
+    document
+    .getElementById("patientSteps")
+    .innerHTML=
+    steps.map((step,index)=>`
+
+        <div class="
+        progress-step
+        ${step.done?"completed":""}">
+
+            <div class="progress-circle">
+                ${step.done?"✓":index+1}
+            </div>
+
+            ${step.label}
+
+        </div>
+
+    `).join("");
+
+
+    let status=
+    "Application submitted. Awaiting Admin eligibility verification.";
+
+
+    if(p.eligibility==="rejected"){
+
+        status=
+        "Application has been rejected by Admin.";
+
+    }
+    else if(
+        p.eligibility==="approved" &&
+        p.payment!=="confirmed"
+    ){
+
+        status=
+        "Eligibility approved. Payment is now available.";
+
+    }
+    else if(p.payment==="submitted"){
+
+        status=
+        "Payment submitted. Awaiting Admin confirmation.";
+
+    }
+    else if(
+        p.payment==="confirmed" &&
+        p.registration!=="registered"
+    ){
+
+        status=
+        "Payment confirmed. Awaiting final registration.";
+
+    }
+    else if(
+        p.registration==="registered"
+    ){
+
+        status=
+        "Registration completed. Treatment access is active.";
+
+    }
+
+
+    document
+    .getElementById("patientStatus")
+    .textContent=status;
+
+}
+
+
+/* =========================================================
+   PAYMENT
+========================================================= */
+
+function submitPayment(){
+
+    if(!currentPatient)return;
+
+
+    if(currentPatient.eligibility!=="approved"){
+
+        showModal(
+            "Payment Locked",
+            "Payment is available only after Admin approves eligibility."
+        );
+
+        return;
+    }
+
+
+    if(!db.phases.payment){
+
+        showModal(
+            "Payment Closed",
+            "Payment phase is currently closed by Admin."
+        );
+
+        return;
+    }
+
+
+    const utr=
+    document.getElementById("utrInput")
+    .value.trim();
+
+
+    if(!utr){
+
+        showModal(
+            "UTR Required",
+            "Please enter your UTR / transaction number."
+        );
+
+        return;
+    }
+
+
+    currentPatient.utr=utr;
+
+    currentPatient.payment="submitted";
+
+    syncCurrent();
+
+
+    showModal(
+        "Payment Submitted",
+        `
+        Payment details submitted successfully.
+
+        <br><br>
+
+        UTR:
+        <b>${escapeHTML(utr)}</b>
+
+        <br><br>
+
+        Admin confirmation is required before activation.
+        `
+    );
+
+}
+
+
+/* =========================================================
+   SYNC PATIENT
+========================================================= */
+
+function syncCurrent(){
+
+    const index=
+    db.patients.findIndex(
+        p=>p.regNo===currentPatient.regNo
+    );
+
+
+    if(index>=0){
+
+        db.patients[index]=currentPatient;
+
+        saveDB();
+
+    }
+
+}
+
+
+/* =========================================================
+   ADMIN LOGIN
+========================================================= */
+
+function adminLogin(){
+
+    const code=
+    document.getElementById("adminCode")
+    .value;
+
+
+    if(code!=="5555"){
+
+        showModal(
+            "Access Denied",
+            "Invalid Admin access code."
+        );
+
+        return;
+    }
+
+
+    showScreen("adminScreen");
+
+    renderAdmin();
+
+}
+
+
+/* =========================================================
+   ADMIN DASHBOARD
+========================================================= */
+
+function renderAdmin(){
+
+    const total=
+    db.patients.length;
+
+
+    const approved=
+    db.patients.filter(
+        p=>p.eligibility==="approved"
+    ).length;
+
+
+    const rejected=
+    db.patients.filter(
+        p=>p.eligibility==="rejected"
+    ).length;
+
+
+    const confirmed=
+    db.patients.filter(
+        p=>p.payment==="confirmed"
+    ).length;
+
+
+    const registered=
+    db.patients.filter(
+        p=>p.registration==="registered"
+    ).length;
+
+
+    document
+    .getElementById("adminStats")
+    .innerHTML=`
+
+        <div class="stat-card">
+            <span class="stat-number">${total}</span>
+            <span class="stat-label">Booked</span>
+        </div>
+
+        <div class="stat-card">
+            <span class="stat-number">${approved}</span>
+            <span class="stat-label">Verified</span>
+        </div>
+
+        <div class="stat-card">
+            <span class="stat-number">${rejected}</span>
+            <span class="stat-label">Rejected</span>
+        </div>
+
+        <div class="stat-card">
+            <span class="stat-number">${confirmed}</span>
+            <span class="stat-label">Payment Confirmed</span>
+        </div>
+
+        <div class="stat-card">
+            <span class="stat-number">${registered}</span>
+            <span class="stat-label">Registered</span>
+        </div>
+
+        <div class="stat-card">
+            <span class="stat-number">15,000</span>
+            <span class="stat-label">Total Capacity</span>
+        </div>
+
+    `;
+
+
+    renderAdminTable();
+
+    updatePhaseButtons();
+
+}
+
+
+/* =========================================================
+   ADMIN TABLE
+========================================================= */
+
+function renderAdminTable(){
+
+    const tbody=
+    document.getElementById("adminTable");
+
+
+    if(!db.patients.length){
+
+        tbody.innerHTML=`
+
+        <tr>
+            <td colspan="7">
+                No patient applications yet.
+            </td>
+        </tr>
+
+        `;
+
+        return;
+    }
+
+
+    tbody.innerHTML=
+    db.patients.map((p,index)=>`
+
+        <tr>
+
+            <td>
+                ${p.regNo}
+            </td>
+
+            <td>
+                ${escapeHTML(p.name)}
+            </td>
+
+            <td>
+                ${escapeHTML(p.district)}
+                /
+                ${escapeHTML(p.taluk)}
+            </td>
+
+            <td>
+                ${p.eligibility}
+            </td>
+
+            <td>
+                ${p.payment}
+            </td>
+
+            <td>
+                ${p.registration}
+            </td>
+
+            <td>
+
+                ${
+                    p.eligibility==="pending"
+
+                    ?
+
+                    `
+                    <button
+                    class="mini-button"
+                    onclick="approveEligibility(${index})">
+                    Approve
+                    </button>
+
+                    <button
+                    class="mini-button"
+                    onclick="rejectEligibility(${index})">
+                    Reject
+                    </button>
+                    `
+
+                    :
+
+                    ""
+                }
+
+
+                ${
+                    p.payment==="submitted"
+
+                    ?
+
+                    `
+                    <button
+                    class="mini-button"
+                    onclick="confirmPayment(${index})">
+                    Confirm Payment
+                    </button>
+                    `
+
+                    :
+
+                    ""
+                }
+
+
+                ${
+                    p.payment==="confirmed" &&
+                    p.registration!=="registered"
+
+                    ?
+
+                    `
+                    <button
+                    class="mini-button"
+                    onclick="activatePatient(${index})">
+                    Final Register
+                    </button>
+                    `
+
+                    :
+
+                    ""
+                }
+
+            </td>
+
+        </tr>
+
+    `).join("");
+
+}
+
+
+/* =========================================================
+   ADMIN ELIGIBILITY
+========================================================= */
+
+function approveEligibility(index){
+
+    if(!db.phases.verification){
+
+        showModal(
+            "Verification Closed",
+            "Open the Verification phase before approving patients."
+        );
+
+        return;
+    }
+
+
+    db.patients[index].eligibility="approved";
+
+    saveDB();
+
+    renderAdmin();
+
+
+    showModal(
+        "Eligibility Approved",
+        `
+        Patient
+        <b>${db.patients[index].regNo}</b>
+        is now eligible for payment.
+        `
+    );
+
+}
+
+
+function rejectEligibility(index){
+
+    if(!db.phases.verification){
+
+        showModal(
+            "Verification Closed",
+            "Open the Verification phase before rejecting patients."
+        );
+
+        return;
+    }
+
+
+    db.patients[index].eligibility="rejected";
+
+    saveDB();
+
+    renderAdmin();
+
+}
+
+
+/* =========================================================
+   PAYMENT CONFIRMATION
+========================================================= */
+
+function confirmPayment(index){
+
+    if(!db.phases.payment){
+
+        showModal(
+            "Payment Phase Closed",
+            "Open the Payment phase first."
+        );
+
+        return;
+    }
+
+
+    db.patients[index].payment="confirmed";
+
+    db.patients[index].balance=0;
+
+    saveDB();
+
+    renderAdmin();
+
+
+    showModal(
+        "Payment Confirmed",
+        `
+        Payment confirmed for
+        <b>${db.patients[index].regNo}</b>.
+        `
+    );
+
+}
+
+
+/* =========================================================
+   FINAL REGISTRATION
+========================================================= */
+
+function activatePatient(index){
+
+    if(!db.phases.final){
+
+        showModal(
+            "Final Registration Closed",
+            "Open Final Registration phase first."
+        );
+
+        return;
+    }
+
+
+    const patient=
+    db.patients[index];
+
+
+    if(patient.payment!=="confirmed"){
+
+        showModal(
+            "Activation Locked",
+            "Only payment-confirmed patients can be activated."
+        );
+
+        return;
+    }
+
+
+    patient.registration="registered";
+
+
+    saveDB();
+
+    renderAdmin();
+
+
+    showModal(
+        "Patient Activated",
+        `
+        Final registration completed.
+
+        <br><br>
+
+        Permanent Registration No.
+
+        <br><br>
+
+        <b style="
+        font-size:23px;
+        color:#00a8b3">
+
+        ${patient.regNo}
+
+        </b>
+        `
+    );
+
+}
+
+
+/* =========================================================
+   PHASE CONTROL
+========================================================= */
+
+function togglePhase(phase){
+
+    db.phases[phase]=
+    !db.phases[phase];
+
+    saveDB();
+
+    renderAdmin();
+
+}
+
+
+function updatePhaseButtons(){
+
+    const names={
+        booking:"Booking",
+        verification:"Verification",
+        payment:"Payment",
+        final:"Final Registration"
+    };
+
+
+    Object.keys(names)
+    .forEach(phase=>{
+
+        const button=
+        document.getElementById(
+            phase==="final"
+            ?"finalBtn"
+            :phase+"Btn"
+        );
+
+
+        if(db.phases[phase]){
+
+            button.textContent=
+            names[phase]+" • OPEN";
+
+            button.classList.add("open");
+
+        }
+        else{
+
+            button.textContent=
+            names[phase]+" • CLOSED";
+
+            button.classList.remove("open");
+
+        }
+
+    });
+
+}
+
+
+/* =========================================================
+   DOCTOR LOGIN
+========================================================= */
+
+function doctorLogin(){
+
+    const code=
+    document.getElementById("doctorCode")
+    .value;
+
+
+    if(code!=="doctor123"){
+
+        showModal(
+            "Access Denied",
+            "Invalid Doctor access code."
+        );
+
+        return;
+    }
+
+
+    showScreen("doctorScreen");
+
+}
+
+
+/* =========================================================
+   DOCTOR SEARCH
+========================================================= */
+
+function doctorSearch(){
+
+    const reg=
+    document.getElementById("doctorSearchReg")
+    .value
+    .trim()
+    .toUpperCase();
+
+
+    const name=
+    document.getElementById("doctorSearchName")
+    .value
+    .trim()
+    .toLowerCase();
+
+
+    const results=
+    db.patients.filter(patient=>{
+
+        if(patient.registration!=="registered")
+            return false;
+
+
+        if(reg && patient.regNo!==reg)
+            return false;
+
+
+        if(
+            name &&
+            !patient.name
+            .toLowerCase()
+            .includes(name)
+        )
+            return false;
+
+
+        return true;
+
+    });
+
+
+    const resultBox=
+    document.getElementById("doctorResult");
+
+
+    if(!results.length){
+
+        resultBox.innerHTML=
+        `
+        <div class="info-card">
+            No registered paid patient found.
+        </div>
+        `;
+
+        return;
+    }
+
+
+    resultBox.innerHTML=
+    results.map(patient=>`
+
+        <div class="doctor-patient">
+
+            <h3>
+                ${escapeHTML(patient.name)}
+            </h3>
+
+
+            <div class="doctor-status">
+
+                <b>Registration:</b>
+                ${patient.regNo}
+
+                <br>
+
+                <b>District:</b>
+                ${escapeHTML(patient.district)}
+
+                <br>
+
+                <b>Taluk:</b>
+                ${escapeHTML(patient.taluk)}
+
+                <br>
+
+                <b>Package:</b>
+                ${escapeHTML(patient.package)}
+
+                <br>
+
+                <b>Current Status:</b>
+                ${patient.doctorStatus}
+
+            </div>
+
+
+            <div class="doctor-buttons">
+
+                <button
+                class="mini-button"
+                onclick="doctorStatus('${patient.regNo}','consulting')">
+
+                Consulting
+
+                </button>
+
+
+                <button
+                class="mini-button"
+                onclick="doctorStatus('${patient.regNo}','completed')">
+
+                Completed
+
+                </button>
+
+
+                <button
+                class="mini-button"
+                onclick="doctorStatus('${patient.regNo}','medicine collected')">
+
+                Medicine Collected
+
+                </button>
+
+            </div>
+
+        </div>
+
+    `).join("");
+
+}
+
+
+/* =========================================================
+   DOCTOR STATUS
+========================================================= */
+
+function doctorStatus(regNo,status){
+
+    const patient=
+    db.patients.find(
+        p=>p.regNo===regNo
+    );
+
+
+    if(!patient)return;
+
+
+    patient.doctorStatus=status;
+
+
+    patient.visits.push({
+
+        date:
+        new Date()
+        .toLocaleDateString("en-IN"),
+
+        status:status
+
+    });
+
+
+    saveDB();
+
+    doctorSearch();
+
+}
+
+
+/* =========================================================
+   RECEIPT LOCK
+========================================================= */
+
+function showReceipt(){
+
+    const p=currentPatient;
+
+
+    if(!p){
+
+        openPatientLogin();
+
+        return;
+    }
+
+
+    /*
+       RECEIPT IS LOCKED UNTIL:
+
+       1. Eligibility approved
+       2. Payment confirmed
+       3. Final registration completed
+       4. Paid amount > 0
+    */
+
+
+    if(
+        p.eligibility!=="approved" ||
+        p.payment!=="confirmed" ||
+        p.registration!=="registered" ||
+        p.packageAmount<=0
+    ){
+
+        showModal(
+            "Receipt Locked",
+            `
+            Receipt is not available yet.
+
+            <br><br>
+
+            Receipt becomes available only after:
+
+            <br>
+            ✓ Eligibility approved
+
+            <br>
+            ✓ Payment confirmed
+
+            <br>
+            ✓ Final registration completed
+
+            <br>
+            ✓ Paid amount greater than ₹0
+            `
+        );
+
+        return;
+    }
+
+
+    document
+    .getElementById("receiptContent")
+    .innerHTML=`
+
+        <div class="receipt">
+
+            <div class="receipt-header">
+
+                <div class="receipt-brand">
+
+                    <h1>
+                        HOMEOPLUSS
+                    </h1>
+
+                    <p>
+                        HOMEOKYC Treatment Receipt
+                    </p>
+
+                </div>
+
+
+                <div class="receipt-paid">
+
+                    PAID
+
+                    <br>
+
+                    ${new Date()
+                    .toLocaleDateString("en-IN")}
+
+                </div>
+
+            </div>
+
+
+            <table>
+
+                <tr>
+                    <th>Registration No.</th>
+                    <td>${p.regNo}</td>
+                </tr>
+
+                <tr>
+                    <th>Patient Name</th>
+                    <td>${escapeHTML(p.name)}</td>
+                </tr>
+
+                <tr>
+                    <th>Mobile</th>
+                    <td>${p.mobile}</td>
+                </tr>
+
+                <tr>
+                    <th>District</th>
+                    <td>${escapeHTML(p.district)}</td>
+                </tr>
+
+                <tr>
+                    <th>Taluk</th>
+                    <td>${escapeHTML(p.taluk)}</td>
+                </tr>
+
+                <tr>
+                    <th>Package</th>
+                    <td>${escapeHTML(p.package)}</td>
+                </tr>
+
+                <tr>
+                    <th>Payment</th>
+                    <td>Confirmed</td>
+                </tr>
+
+                <tr>
+                    <th>UTR</th>
+                    <td>${escapeHTML(p.utr)}</td>
+                </tr>
+
+            </table>
+
+
+            <div class="receipt-total">
+
+                Total Paid:
+                ₹${p.packageAmount}
+
+            </div>
+
+
+            <div style="
+            display:flex;
+            justify-content:space-between;
+            margin-top:65px;
+            font-size:11px">
+
+                <span>
+                    HOMEOPLUSS
+                </span>
+
+                <span>
+                    Authorized
+                </span>
+
+            </div>
+
+        </div>
+
+    `;
+
+
+    showScreen("receiptScreen");
+
+}
+
+
+/* =========================================================
+   PACKAGE
+========================================================= */
+
+function showPackage(){
+
+    const p=currentPatient;
+
+
+    showModal(
+        "Package Details",
+        `
+        <b>${escapeHTML(p.package)}</b>
+
+        <br><br>
+
+        Package Amount:
+        <b>₹${p.packageAmount}</b>
+
+        <br>
+
+        Balance:
+        <b>₹${p.balance}</b>
+
+        <br>
+
+        Payment:
+        <b>${p.payment}</b>
+
+        <br>
+
+        Registration:
+        <b>${p.registration}</b>
+        `
+    );
+
+}
+
+
+/* =========================================================
+   VISITS
+========================================================= */
+
+function showVisits(){
+
+    const p=currentPatient;
+
+
+    if(!p.visits.length){
+
+        showModal(
+            "Visit History",
+            "No treatment visits have been recorded yet."
+        );
+
+        return;
+    }
+
+
+    showModal(
+        "Visit History",
+
+        p.visits.map(v=>
+        `
+        <div class="modal-message"
+        style="margin-bottom:8px">
+
+            ${v.date}
+
+            <br>
+
+            <b>${escapeHTML(v.status)}</b>
+
+        </div>
+        `
+        ).join("")
+    );
+
+}
+
+
+/* =========================================================
+   APPOINTMENT
+========================================================= */
+
+function showAppointment(){
+
+    if(
+        !currentPatient ||
+        currentPatient.registration!=="registered"
+    ){
+
+        showModal(
+            "Appointment Locked",
+            "Appointment booking becomes available after final registration."
+        );
+
+        return;
+    }
+
+
+    showModal(
+        "Appointment",
+        `
+        <b>Appointment Service</b>
+
+        <br><br>
+
+        Select your preferred appointment date.
+
+        <br><br>
+
+        <input
+        type="date"
+        style="
+        width:100%;
+        height:52px;
+        border:2px solid #dcebed;
+        border-radius:13px;
+        padding:0 12px;
+        font-size:16px">
+
+        <br><br>
+
+        Appointment request can be submitted
+        to HOMEOPLUSS.
+        `
+    );
+
+}
+
+
+/* =========================================================
+   SOS
+========================================================= */
+
+function showSOS(){
+
+    showModal(
+        "SOS",
+        `
+        🚨 <b>Emergency Notice</b>
+
+        <br><br>
+
+        For a medical emergency, contact
+        your nearest emergency medical service
+        immediately.
+
+        <br><br>
+
+        HOMEOKYC SOS can be used for
+        clinic follow-up communication.
+        `
+    );
+
+}
+
+
+/* =========================================================
+   HTML SAFETY
+========================================================= */
+
+function escapeHTML(value){
+
+    return String(value)
+    .replaceAll("&","&amp;")
+    .replaceAll("<","&lt;")
+    .replaceAll(">","&gt;")
+    .replaceAll('"',"&quot;")
+    .replaceAll("'","&#039;");
+
+}
+
+
+/* =========================================================
+   MOBILE VIEWPORT SAFETY
+========================================================= */
+
+function lockViewport(){
+
+    document.documentElement.style.overflow="hidden";
+    document.body.style.overflow="hidden";
+
+}
+
+lockViewport();
+
+
+/* =========================================================
+   PREVENT ACCIDENTAL DOUBLE-TAP ZOOM
+========================================================= */
+
+let lastTouch=0;
+
+document.addEventListener(
+    "touchend",
+    function(event){
+
+        const now=Date.now();
+
+        if(now-lastTouch<=300){
+
+            event.preventDefault();
+
+        }
+
+        lastTouch=now;
+
+    },
+    {passive:false}
+);
+
+
+/* =========================================================
+   ESCAPE MODAL WITH BACK BUTTON / ESC
+========================================================= */
+
+document.addEventListener(
+    "keydown",
+    function(event){
+
+        if(event.key==="Escape"){
+
+            closeModal();
+
+        }
+
+    }
+);
+
+</script>
+
+</body>
+</html>
+```
